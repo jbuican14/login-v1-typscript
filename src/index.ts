@@ -1,14 +1,14 @@
-import express, {Request, Response} from 'express'; 
+import express from 'express'; 
+import { router } from './routes/login-routes';
+import bodyParser from 'body-parser';
+import cookieSession from 'cookie-session';
 
 const app = express(); 
-app.get('/', (req: Request, res: Response) => {
-  res.send(`
-  <div>
-    <h1>Hello</h1>
-  </div>
-  `)
-});
 
-app.listen(3000, () => {
-  console.log('Listening on port 3000')
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(cookieSession({ keys: ['dsafdafd'] }));
+app.use(router); 
+
+app.listen(5000, () => {
+  console.log('Listening on port 5000')
 })
